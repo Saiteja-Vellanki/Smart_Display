@@ -1,4 +1,4 @@
-# Install script for directory: C:/Espressif/frameworks/esp-idf-v5.0/examples/esp-idf-example/T-RGB/components/TouchLib
+# Install script for directory: C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/components/TouchLib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -16,6 +16,7 @@
 
 #include "demos/lv_demos.h"
 
+
 // #define TOUCH_MODULES_FT3267
 #define TOUCH_MODULES_CST_SELF
 
@@ -47,6 +48,7 @@ typedef struct {
   uint8_t data[16];
   uint8_t databytes; // No of data in data; bit 7 = delay after set; 0xFF = end of cmds.
 } lcd_init_cmd_t;
+
 
 DRAM_ATTR static const lcd_init_cmd_t st7701s_init_cmds[] = { // 2.1
     {0xFF, {0x77, 0x01, 0x00, 0x00, 0x10}, 0x05},
@@ -350,10 +352,14 @@ extern "C" void app_main(void) {
   lv_gif_set_src(img, &rock_gif);
   lv_obj_center(img);
 #else
-  LV_IMG_DECLARE(logo);
+  //lv_obj_t * ta = lv_textarea_create(lv_scr_act());
+  //lv_obj_align(ta, LV_ALIGN_CENTER, 100, 100);
+  //lv_textarea_add_text(ta, "Welcome");
+  //vTaskDelay(5000 / portTICK_PERIOD_MS);
+  LV_IMG_DECLARE(enfield_logo);
   ESP_LOGI(TAG, "Test decoding pictures.");
   lv_obj_t *img = lv_img_create(lv_scr_act());
-  lv_img_set_src(img, &logo);
+  lv_img_set_src(img, &enfield_logo);
   lv_obj_center(img);
 
 #endif

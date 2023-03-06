@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Espressif/frameworks/esp-idf-v5.0/examples/esp-idf-example/T-RGB/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
-  include("C:/Espressif/frameworks/esp-idf-v5.0/examples/esp-idf-example/T-RGB/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
-  include("C:/Espressif/frameworks/esp-idf-v5.0/examples/esp-idf-example/T-RGB/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
+  include("C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
+  include("C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
+  include("C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
 
 endif()
 

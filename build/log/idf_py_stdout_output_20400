@@ -1,0 +1,112 @@
+[1/9] Performing build step for 'bootloader'
+[1/1] cmd.exe /C "cd /D C:\Espressif\frameworks\esp-idf-v5.0\examples\T-RGB\build\bootloader\esp-idf\esptool_py && C:\Espressif\python_env\idf5.0_py3.8_env\Scripts\python.exe C:/Espressif/frameworks/esp-idf-v5.0/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5160 bytes. 0x2ea0 bytes (36%) free.
+[2/7] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj
+FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj 
+ccache C:\Espressif\tools\xtensa-esp32s3-elf\esp-2022r1-11.2.0\xtensa-esp32s3-elf\bin\xtensa-esp32s3-elf-g++.exe -DLV_CONF_INCLUDE_SIMPLE -IC:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/build/config -IC:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main -IC:/Espressif/frameworks/esp-idf-v5.0/components/newlib/platform_include -IC:/Espressif/frameworks/esp-idf-v5.0/components/freertos/FreeRTOS-Kernel/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/freertos/esp_additions/include/freertos -IC:/Espressif/frameworks/esp-idf-v5.0/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/freertos/esp_additions/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_hw_support/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_hw_support/include/soc -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_hw_support/include/soc/esp32s3 -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_hw_support/port/esp32s3/. -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_hw_support/port/esp32s3/private_include -IC:/Espressif/frameworks/esp-idf-v5.0/components/heap/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/log/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/soc/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/soc/esp32s3/. -IC:/Espressif/frameworks/esp-idf-v5.0/components/soc/esp32s3/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/hal/esp32s3/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/hal/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/hal/platform_port/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_rom/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_rom/include/esp32s3 -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_rom/esp32s3 -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_common/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_system/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_system/port/soc -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_system/port/include/private -IC:/Espressif/frameworks/esp-idf-v5.0/components/xtensa/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/xtensa/esp32s3/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/lwip/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/lwip/include/apps -IC:/Espressif/frameworks/esp-idf-v5.0/components/lwip/include/apps/sntp -IC:/Espressif/frameworks/esp-idf-v5.0/components/lwip/lwip/src/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/lwip/port/esp32/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/lwip/port/esp32/include/arch -IC:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/components/TouchLib/src -IC:/Espressif/frameworks/esp-idf-v5.0/components/driver/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/driver/deprecated -IC:/Espressif/frameworks/esp-idf-v5.0/components/driver/esp32s3/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_pm/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_ringbuf/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_lcd/include -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_lcd/interface -IC:/Espressif/frameworks/esp-idf-v5.0/components/esp_timer/include -IC:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl -IC:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src -IC:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components -mlongcalls  -fdiagnostics-color=always -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=deprecated-declarations -Wextra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Og -fmacro-prefix-map=C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB=. -fmacro-prefix-map=C:/Espressif/frameworks/esp-idf-v5.0=/IDF -fstrict-volatile-bitfields -Wno-error=unused-but-set-variable -fno-jump-tables -fno-tree-switch-conversion -DconfigENABLE_FREERTOS_DEBUG_OCDAWARE=1 -std=gnu++20 -fno-exceptions -fno-rtti -D_GNU_SOURCE -DIDF_VER=\"v5.0-dirty\" -DESP_PLATFORM -D_POSIX_READER_WRITER_LOCKS -std=gnu++2b -Wmissing-field-initializers -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj -MF esp-idf\main\CMakeFiles\__idf_main.dir\main.cpp.obj.d -o esp-idf/main/CMakeFiles/__idf_main.dir/main.cpp.obj -c C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp
+In file included from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/core/lv_obj.h:140,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/lvgl.h:35,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:11:
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/core/lv_obj_style.h: In function 'void lv_obj_remove_style_all(_lv_obj_t*)':
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/core/lv_obj_style.h:94:48: warning: bitwise operation between different enumeration types '<unnamed enum>' and '<unnamed enum>' is deprecated [-Wdeprecated-enum-enum-conversion]
+   94 |     lv_obj_remove_style(obj, NULL, LV_PART_ANY | LV_STATE_ANY);
+      |                                    ~~~~~~~~~~~~^~~~~~~~~~~~~~
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp: In function 'int readRegister(uint8_t, uint16_t, uint8_t*, uint8_t)':
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:100:11: warning: unused variable 'read_data' [-Wunused-variable]
+  100 |   uint8_t read_data = 0;
+      |           ^~~~~~~~~
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp: In function 'void app_main()':
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:177:3: warning: missing initializer for member 'i2c_config_t::clk_flags' [-Wmissing-field-initializers]
+  177 |   };
+      |   ^
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_timing_t::<unnamed struct>::hsync_idle_low' [-Wmissing-field-initializers]
+  270 |   };
+      |   ^
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_timing_t::<unnamed struct>::vsync_idle_low' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_timing_t::<unnamed struct>::de_idle_high' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_timing_t::<unnamed struct>::pclk_idle_high' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_panel_config_t::bits_per_pixel' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_panel_config_t::bounce_buffer_size_px' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_panel_config_t::sram_trans_align' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_panel_config_t::<unnamed struct>::disp_active_low' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_panel_config_t::<unnamed struct>::refresh_on_demand' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_panel_config_t::<unnamed struct>::no_fb' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:270:3: warning: missing initializer for member 'esp_lcd_rgb_panel_config_t::<unnamed struct>::bb_invalidate_cache' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:276:3: warning: missing initializer for member 'esp_lcd_rgb_panel_event_callbacks_t::on_bounce_empty' [-Wmissing-field-initializers]
+  276 |   };
+      |   ^
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:327:117: warning: missing initializer for member 'esp_timer_create_args_t::arg' [-Wmissing-field-initializers]
+  327 |   const esp_timer_create_args_t lvgl_tick_timer_args = {.callback = &example_increase_lvgl_tick, .name = "lvgl_tick"};
+      |                                                                                                                     ^
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:327:117: warning: missing initializer for member 'esp_timer_create_args_t::dispatch_method' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:327:117: warning: missing initializer for member 'esp_timer_create_args_t::skip_unhandled_events' [-Wmissing-field-initializers]
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:354:40: error: too many arguments to function 'lv_obj_t* lv_label_create(lv_obj_t*)'
+  354 |     lv_obj_t * label1 = lv_label_create(lv_scr_act(), NULL);
+      |                         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+In file included from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/lvgl.h:49,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:11:
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/widgets/lv_label.h:90:12: note: declared here
+   90 | lv_obj_t * lv_label_create(lv_obj_t * parent);
+      |            ^~~~~~~~~~~~~~~
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:355:36: error: 'LV_LABEL_LONG_BREAK' was not declared in this scope; did you mean 'LV_LABEL_LONG_WRAP'?
+  355 |     lv_label_set_long_mode(label1, LV_LABEL_LONG_BREAK);     /*Break the long lines*/
+      |                                    ^~~~~~~~~~~~~~~~~~~
+      |                                    LV_LABEL_LONG_WRAP
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:357:32: error: 'LV_LABEL_ALIGN_CENTER' was not declared in this scope; did you mean 'LV_FLEX_ALIGN_CENTER'?
+  357 |     lv_label_set_align(label1, LV_LABEL_ALIGN_CENTER);       /*Center aligned lines*/
+      |                                ^~~~~~~~~~~~~~~~~~~~~
+      |                                LV_FLEX_ALIGN_CENTER
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:357:5: error: 'lv_label_set_align' was not declared in this scope; did you mean 'lv_style_set_align'?
+  357 |     lv_label_set_align(label1, LV_LABEL_ALIGN_CENTER);       /*Center aligned lines*/
+      |     ^~~~~~~~~~~~~~~~~~
+      |     lv_style_set_align
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:361:26: warning: converting to non-pointer type 'lv_align_t' {aka 'unsigned char'} from NULL [-Wconversion-null]
+  361 |     lv_obj_align(label1, NULL, LV_ALIGN_CENTER, 0, -30);
+      |                          ^~~~
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:361:17: error: too many arguments to function 'void lv_obj_align(_lv_obj_t*, lv_align_t, lv_coord_t, lv_coord_t)'
+  361 |     lv_obj_align(label1, NULL, LV_ALIGN_CENTER, 0, -30);
+      |     ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\draw\sw/lv_draw_sw_dither.h:16,
+                 from c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\draw\sw/lv_draw_sw_gradient.h:18,
+                 from c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\draw\lv_draw_rect.h:20,
+                 from c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\draw\lv_draw.h:23,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/hal/lv_hal_disp.h:21,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/hal/lv_hal.h:16,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/lvgl.h:33,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:11:
+c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\core\lv_obj_pos.h:180:6: note: declared here
+  180 | void lv_obj_align(struct _lv_obj_t * obj, lv_align_t align, lv_coord_t x_ofs, lv_coord_t y_ofs);
+      |      ^~~~~~~~~~~~
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:363:40: error: too many arguments to function 'lv_obj_t* lv_label_create(lv_obj_t*)'
+  363 |     lv_obj_t * label2 = lv_label_create(lv_scr_act(), NULL);
+      |                         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+In file included from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/lvgl.h:49,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:11:
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/widgets/lv_label.h:90:12: note: declared here
+   90 | lv_obj_t * lv_label_create(lv_obj_t * parent);
+      |            ^~~~~~~~~~~~~~~
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:364:36: error: 'LV_LABEL_LONG_SROLL_CIRC' was not declared in this scope; did you mean 'LV_LABEL_LONG_SCROLL_CIRCULAR'?
+  364 |     lv_label_set_long_mode(label2, LV_LABEL_LONG_SROLL_CIRC);     /*Circular scroll*/
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                                    LV_LABEL_LONG_SCROLL_CIRCULAR
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:367:26: warning: converting to non-pointer type 'lv_align_t' {aka 'unsigned char'} from NULL [-Wconversion-null]
+  367 |     lv_obj_align(label2, NULL, LV_ALIGN_CENTER, 0, 30);
+      |                          ^~~~
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:367:17: error: too many arguments to function 'void lv_obj_align(_lv_obj_t*, lv_align_t, lv_coord_t, lv_coord_t)'
+  367 |     lv_obj_align(label2, NULL, LV_ALIGN_CENTER, 0, 30);
+      |     ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\draw\sw/lv_draw_sw_dither.h:16,
+                 from c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\draw\sw/lv_draw_sw_gradient.h:18,
+                 from c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\draw\lv_draw_rect.h:20,
+                 from c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\draw\lv_draw.h:23,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/hal/lv_hal_disp.h:21,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/src/hal/lv_hal.h:16,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl/lvgl.h:33,
+                 from C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:11:
+c:\espressif\frameworks\esp-idf-v5.0\examples\t-rgb\managed_components\lvgl__lvgl\src\core\lv_obj_pos.h:180:6: note: declared here
+  180 | void lv_obj_align(struct _lv_obj_t * obj, lv_align_t align, lv_coord_t x_ofs, lv_coord_t y_ofs);
+      |      ^~~~~~~~~~~~
+C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/main/main.cpp:317:14: warning: unused variable 'disp' [-Wunused-variable]
+  317 |   lv_disp_t *disp = lv_disp_drv_register(&disp_drv);
+      |              ^~~~
+ninja: build stopped: subcommand failed.

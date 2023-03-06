@@ -1,4 +1,4 @@
-# Install script for directory: C:/Espressif/frameworks/esp-idf-v5.0/examples/esp-idf-example/T-RGB/managed_components/lvgl__lvgl
+# Install script for directory: C:/Espressif/frameworks/esp-idf-v5.0/examples/T-RGB/managed_components/lvgl__lvgl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
