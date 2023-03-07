@@ -356,6 +356,7 @@ extern "C" void app_main(void) {
   //lv_obj_align(ta, LV_ALIGN_CENTER, 100, 100);
   //lv_textarea_add_text(ta, "Welcome");
   //vTaskDelay(5000 / portTICK_PERIOD_MS);
+  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
   LV_IMG_DECLARE(enfield_logo);
   ESP_LOGI(TAG, "Test decoding pictures.");
   lv_obj_t *img = lv_img_create(lv_scr_act());
