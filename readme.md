@@ -1,4 +1,3 @@
-# This example is used to demonstrate the running example in the esp-idf V5.0 environment.
 The build steps are as follows:
 
 ```
