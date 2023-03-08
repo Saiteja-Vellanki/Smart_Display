@@ -153,6 +153,33 @@ static void example_increase_lvgl_tick(void *arg) {
   lv_tick_inc(EXAMPLE_LVGL_TICK_PERIOD_MS);
 }
 
+void taskrun(void *pvParameter)
+{
+  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
+  lv_obj_t * label = lv_label_create(lv_scr_act());
+  lv_label_set_text(label, "Welcome");
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+  vTaskDelay(5000 / portTICK_PERIOD_MS);
+  lv_label_set_text(label, "saiteja's");
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+  vTaskDelay(4000 / portTICK_PERIOD_MS);
+  lv_label_set_text(label, "App_ver_1.0.1");
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+  vTaskDelay(3000 / portTICK_PERIOD_MS);
+  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
+  LV_IMG_DECLARE(enfield_logo);
+  ESP_LOGI(TAG, "Test decoding pictures.");
+  lv_obj_t *img = lv_img_create(lv_scr_act());
+  lv_img_set_src(img, &enfield_logo);
+  lv_obj_center(img);
+    
+  vTaskDelete(NULL);
+   
+}
+
 extern "C" void app_main(void) {
   static lv_disp_draw_buf_t disp_buf; // contains internal graphic buffer(s) called draw buffer(s)
   static lv_disp_drv_t disp_drv;      // contains callback functions
@@ -351,26 +378,20 @@ extern "C" void app_main(void) {
   lv_obj_t *img = lv_gif_create(lv_scr_act());
   lv_gif_set_src(img, &rock_gif);
   lv_obj_center(img);
-#else
-  //lv_obj_t * ta = lv_textarea_create(lv_scr_act());
-  //lv_obj_align(ta, LV_ALIGN_CENTER, 100, 100);
-  //lv_textarea_add_text(ta, "Welcome");
-  //vTaskDelay(5000 / portTICK_PERIOD_MS);
-  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
-  LV_IMG_DECLARE(enfield_logo);
-  ESP_LOGI(TAG, "Test decoding pictures.");
-  lv_obj_t *img = lv_img_create(lv_scr_act());
-  lv_img_set_src(img, &enfield_logo);
-  lv_obj_center(img);
+
+  #else
+   
+   
 
 #endif
-
+if ( xTaskCreate(&taskrun, "task_run", 1024 * 20, NULL, 5 , NULL) != pdPASS ) {
+        printf("task run failed\r\n");
+    }
   while (1) {
     // raise the task priority of LVGL and/or reduce the handler period can improve the performance
     vTaskDelay(pdMS_TO_TICKS(2));
-    // The task running lv_timer_handler should have lower priority than that running `lv_tick_inc`
     lv_timer_handler();
-
+    // The task running lv_timer_handler should have lower priority than that running `lv_tick_inc`
     // if (touch.read()) {
     //   uint8_t n = touch.getPointNum();
     //   printf("getPointNum: %d  \r\n", n);
@@ -380,6 +401,7 @@ extern "C" void app_main(void) {
     //   }
     // }
   }
+   
 }
 
 static void lcd_send_data(uint8_t data) {
