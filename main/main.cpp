@@ -17,7 +17,7 @@
 #include "demos/lv_demos.h"
 
 
-// #define TOUCH_MODULES_FT3267
+//#define TOUCH_MODULES_FT3267
 #define TOUCH_MODULES_CST_SELF
 
 #ifdef TOUCH_MODULES_FT3267
@@ -175,7 +175,10 @@ void taskrun(void *pvParameter)
   lv_obj_t *img = lv_img_create(lv_scr_act());
   lv_img_set_src(img, &enfield_logo);
   lv_obj_center(img);
-    
+  lv_label_set_text(label, LV_SYMBOL_BLUETOOTH);
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 0);
+ 
   vTaskDelete(NULL);
    
 }
