@@ -1,4 +1,4 @@
-# Install script for directory: C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/managed_components/lvgl__lvgl
+# Install script for directory: C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/managed_components/lvgl__lvgl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

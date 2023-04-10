@@ -1,0 +1,13 @@
+esptool.py v4.4
+Serial port COM8
+Connecting...
+Chip is ESP32-S3 (revision v0.1)
+Features: WiFi, BLE
+Crystal is 40MHz
+MAC: f4:12:fa:cf:1d:3c
+Changing baud rate to 460800
+Changed.
+Enabling default SPI flash mode...
+Erasing flash (this may take a while)...
+
+A fatal error occurred: ESP32-S3 ROM does not support function erase_flash.

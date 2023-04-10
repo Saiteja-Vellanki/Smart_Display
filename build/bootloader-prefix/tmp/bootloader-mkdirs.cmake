@@ -5,18 +5,18 @@ cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
   "C:/Espressif/frameworks/esp-idf-v5.0/components/bootloader/subproject"
-  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader"
-  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader-prefix"
-  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader-prefix/tmp"
-  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader-prefix/src/bootloader-stamp"
-  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader-prefix/src"
-  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader"
+  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader-prefix"
+  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader-prefix/tmp"
+  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader-prefix/src"
+  "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

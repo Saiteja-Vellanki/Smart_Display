@@ -1,0 +1,1 @@
+C:/Espressif/frameworks/esp-idf-v5.0/Kconfig:16: warning: IDF_ENV_FPGA has 'option env="IDF_ENV_FPGA"', but the environment variable IDF_ENV_FPGA is not set

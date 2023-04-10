@@ -1,8 +1,8 @@
 {
     "project_name":       "bootloader",
     "project_path":       "C:/Espressif/frameworks/esp-idf-v5.0/components/bootloader/subproject",
-    "build_dir":          "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/build/bootloader",
-    "config_file":        "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display/sdkconfig",
+    "build_dir":          "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/build/bootloader",
+    "config_file":        "C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/sdkconfig",
     "config_defaults":    "",
     "app_elf":            "bootloader.elf",
     "app_bin":            "bootloader.bin",
