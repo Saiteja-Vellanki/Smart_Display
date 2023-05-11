@@ -1,4 +1,4 @@
-# Install script for directory: C:/Espressif/frameworks/esp-idf-v5.0/examples/Saiteja's/Enfield_Smart_Display_BLE/main
+# Install script for directory: C:/Espressif/frameworks/esp-idf-v5.0.1/examples/Saiteja's/Enfield_Smart_Display_BLE/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

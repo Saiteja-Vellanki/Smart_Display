@@ -30,6 +30,7 @@
 #include "esp_gatt_common_api.h"
 
 
+
 //#define TOUCH_MODULES_FT3267
 #define TOUCH_MODULES_CST_SELF
 
@@ -44,8 +45,7 @@
 #include "TouchLib.h"
 
 static const char *TAG = "Display Decode";
-#define GATTS_TAG "EN_SMARTDISP"
-#define BIT1 (0x1 <<1)
+#define GATTS_TAG "SMARTDISP"
 #define ADV_CONFIG_FLAG                           (1 << 0)
 #define SCAN_RSP_CONFIG_FLAG                      (1 << 1)
 #define EXAMPLE_LVGL_TICK_PERIOD_MS 2
@@ -53,6 +53,7 @@ static const char *TAG = "Display Decode";
 
 TouchLib touch;
 static uint8_t adv_config_done = 0;
+
 
 // we use two semaphores to sync the VSYNC event and the LVGL task, to avoid potential tearing effect
 #if CONFIG_EXAMPLE_AVOID_TEAR_EFFECT_WITH_SEM
@@ -75,7 +76,7 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
 #define GATTS_DESCR_UUID_TEST_B     0x2222
 #define GATTS_NUM_HANDLE_TEST_B     4
 
-#define TEST_DEVICE_NAME            "EN_SMART_DSPLY"
+#define TEST_DEVICE_NAME            "BluFyi"
 #define TEST_MANUFACTURER_DATA_LEN  17
 
 #define GATTS_DEMO_CHAR_VAL_LEN_MAX 0x40
@@ -86,7 +87,10 @@ static uint8_t char1_str[] = {0x11,0x22,0x33};
 static esp_gatt_char_prop_t a_property = 0;
 static esp_gatt_char_prop_t b_property = 0;
 esp_err_t ret;
-lv_obj_t * label;
+lv_obj_t *label;
+lv_obj_t *img;
+SemaphoreHandle_t xSemaphore;
+int x=0;
 
 static esp_attr_value_t gatts_demo_char1_val =
 {
@@ -196,6 +200,19 @@ typedef struct {
   uint8_t databytes; // No of data in data; bit 7 = delay after set; 0xFF = end of cmds.
 } lcd_init_cmd_t;
 
+static void logo_init(void)
+{
+   lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
+   LV_IMG_DECLARE(Our_logo);
+   ESP_LOGI(TAG, "Test decoding pictures.");
+  lv_img_set_src(img, &Our_logo);
+  lv_obj_center(img);
+  lv_label_set_text(label, LV_SYMBOL_BLUETOOTH);
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 0);
+  vTaskDelay(5000 / portTICK_PERIOD_MS);
+
+}
 static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param)
 {
     if(event == ESP_GAP_BLE_SCAN_RSP_DATA_SET_COMPLETE_EVT)
@@ -253,12 +270,14 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
         //ESP_LOGI(GATTS_TAG, "The passkey Notify number:%06" PRIu32, param->ble_security.key_notif.passkey);
     }    
     else if(event ==ESP_GAP_BLE_AUTH_CMPL_EVT) {
+        x=0;
         esp_log_buffer_hex("addr", param->ble_security.auth_cmpl.bd_addr, ESP_BD_ADDR_LEN);
         lv_label_set_text(label, LV_SYMBOL_BLUETOOTH);
         lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x0000FF), LV_PART_MAIN);
         lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 0);
         //ESP_LOGI(GATTS_TAG, "pair status = %s",param->ble_security.auth_cmpl.success ? "success" : "fail");
         if (!param->ble_security.auth_cmpl.success) {
+            x=0;
         esp_log_buffer_hex("addr", param->ble_security.auth_cmpl.bd_addr, ESP_BD_ADDR_LEN);
         lv_label_set_text(label, LV_SYMBOL_BLUETOOTH);
         lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
@@ -293,6 +312,7 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
 }
 
 void example_write_event_env(esp_gatt_if_t gatts_if, prepare_type_env_t *prepare_write_env, esp_ble_gatts_cb_param_t *param){
+ 
     esp_gatt_status_t status = ESP_GATT_OK;
     if (param->write.need_rsp){
         if (param->write.is_prep){
@@ -352,6 +372,8 @@ void example_exec_write_event_env(prepare_type_env_t *prepare_write_env, esp_ble
 static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_if, esp_ble_gatts_cb_param_t *param) {
     
     char *buff="\0";
+    char *p_data;
+    //int data=0;
     if(event == ESP_GATTS_REG_EVT)
     {
         //ESP_LOGI(GATTS_TAG, "REGISTER_APP_EVT, status %d, app_id %d\n", param->reg.status, param->reg.app_id);
@@ -412,21 +434,39 @@ static void gatts_profile_a_event_handler(esp_gatts_cb_event_t event, esp_gatt_i
         //ESP_LOGI(GATTS_TAG, "GATT_WRITE_EVT, conn_id %d, trans_id %d, handle %d", param->write.conn_id, param->write.trans_id, param->write.handle);
         if (!param->write.is_prep){
             //ESP_LOGI(GATTS_TAG, "GATT_WRITE_EVT, value len %d, value :", param->write.len);
+            x++;
+            if(x>1)
+            {
+            LV_IMG_DECLARE(call_logo);
+             ESP_LOGI(TAG, "Test decoding pictures.");
+            lv_img_set_src(img, &call_logo);
+            lv_obj_center(img);
             esp_log_buffer_hex(GATTS_TAG, param->write.value, param->write.len);
             strcpy(buff,(char*)param->write.value);
             ESP_LOGI(GATTS_TAG, "%s",buff);
-            //ESP_LOG_BUFFER_CHAR(GATTS_TAG, param->write.value, param->write.len);
-            //esp_log_buffer_char(GATTS_TAG, param->write.value, param->write.len);
-            //sscanf(buff,"%s",param->write.value);
-            //sprintf(buff,"%hhn",param->write.value);
-           // sprintf(buff, "%x", param->write.value);
-             //ESP_LOGI(GATTS_TAG, "Call received 2");
-            // lv_label_set_text(label, LV_SYMBOL_CALL);
-            // lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x0000FF), LV_PART_MAIN);
-            // lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 0);
-             lv_label_set_text(label, buff);
-            lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x0000FF), LV_PART_MAIN);
-             lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 0);
+            lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+            lv_label_set_text(label, buff);
+            lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+            lv_obj_align(label, LV_ALIGN_TOP_MID, 10,100);
+           
+            // data = atoi(p_data);
+            // if(data)
+            // {
+            //    
+            // }
+            
+   
+            x=0;
+            //  p_data = strstr(buff,"Ended");
+            // if(strlen(p_data))
+            // {
+            //     logo_init();
+            // }
+            
+             
+            }
+
+           
             if (gl_profile_tab[PROFILE_A_APP_ID].descr_handle == param->write.handle && param->write.len == 2){
                 uint16_t descr_value = param->write.value[1]<<8 | param->write.value[0];
                 if (descr_value == 0x0001){
@@ -887,42 +927,47 @@ static void example_increase_lvgl_tick(void *arg) {
   lv_tick_inc(EXAMPLE_LVGL_TICK_PERIOD_MS);
 }
 
+// void startup_gif(void)
+// {
+//   LV_IMG_DECLARE(startup);
+//   img = lv_gif_create(lv_scr_act());
+//   lv_gif_set_src(img, &startup);
+//   lv_obj_center(img);
+//   vTaskDelay(8000 / portTICK_PERIOD_MS);
+// }
+
 void taskrun(void *pvParameter)
 {
-  
-  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
+   
+  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
   label= lv_label_create(lv_scr_act());
-  lv_label_set_text(label, "Welcome");
-  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
-  lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
-  vTaskDelay(5000 / portTICK_PERIOD_MS);
-  lv_label_set_text(label, "saiteja's");
-  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_label_set_text(label, "Hello !!!");
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
   lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
   vTaskDelay(4000 / portTICK_PERIOD_MS);
-  lv_label_set_text(label, "App_ver_1.0.1");
-  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
+  lv_label_set_text(label, "Saiteja's");
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
+  lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+  vTaskDelay(4000 / portTICK_PERIOD_MS);
+  lv_label_set_text(label, "App_ver_1.0.2");
+  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
   lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
   vTaskDelay(3000 / portTICK_PERIOD_MS);
-  lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
-  LV_IMG_DECLARE(enfield_logo);
-  ESP_LOGI(TAG, "Test decoding pictures.");
-  lv_obj_t *img = lv_img_create(lv_scr_act());
-  lv_img_set_src(img, &enfield_logo);
-  lv_obj_center(img);
-  lv_label_set_text(label, LV_SYMBOL_BLUETOOTH);
-  lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0x000000), LV_PART_MAIN);
-  lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 0);
-  vTaskDelay(500 / portTICK_PERIOD_MS);
+   
+   logo_init();
+  //xSemaphoreGive( xSemaphore );
+  //vTaskDelay(50 / portTICK_PERIOD_MS);
+ 
+
   vTaskDelete(NULL);
 }
 
-void bletask(void *pvParameter)
+void bletask(void)
 {
     
  
    
-
+ //xSemaphoreTake(xSemaphore,portMAX_DELAY);
   ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT));
 
     esp_bt_controller_config_t bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();
@@ -995,8 +1040,8 @@ void bletask(void *pvParameter)
     and the init key means which key you can distribute to the slave. */
     esp_ble_gap_set_security_param(ESP_BLE_SM_SET_INIT_KEY, &init_key, sizeof(uint8_t));
     esp_ble_gap_set_security_param(ESP_BLE_SM_SET_RSP_KEY, &rsp_key, sizeof(uint8_t));
-
-     vTaskDelete(NULL);
+ // vTaskDelay(50 / portTICK_PERIOD_MS);
+        //vTaskDelete(NULL);
 }
 
 extern "C" void app_main(void) {
@@ -1010,7 +1055,6 @@ extern "C" void app_main(void) {
   sem_gui_ready = xSemaphoreCreateBinary();
   assert(sem_gui_ready);
 #endif
-
   i2c_config_t conf = {
       .mode = I2C_MODE_MASTER,
       .sda_io_num = IIC_SDA_PIN,
@@ -1192,11 +1236,7 @@ extern "C" void app_main(void) {
   ESP_LOGI(TAG, "Display LVGL Demos");
   lv_demo_music();
 #elif LV_USE_GIF
-  LV_IMG_DECLARE(rock_gif);
-  ESP_LOGI(TAG, "Test decoding gif pictures. Pay attention to turn on LVGL GIF support.");
-  lv_obj_t *img = lv_gif_create(lv_scr_act());
-  lv_gif_set_src(img, &rock_gif);
-  lv_obj_center(img);
+  
 
   #else
    
@@ -1204,7 +1244,7 @@ extern "C" void app_main(void) {
 
 #endif
 
-
+     //startup_gif();
 
     // Initialize NVS.
     ret = nvs_flash_init();
@@ -1214,31 +1254,43 @@ extern "C" void app_main(void) {
     }
     ESP_ERROR_CHECK( ret );
  
- 
+   img = lv_img_create(lv_scr_act());
+ xSemaphore = xSemaphoreCreateBinary();
 
-if ( xTaskCreate(&taskrun, "task_run", 1024 * 20, NULL, 2 , NULL) != pdPASS ) {
+if ( xTaskCreate(&taskrun, "task_run", 1024 * 20, NULL,  1, NULL) != pdPASS ) {
         printf("task run failed\r\n");
     }
 
-    if ( xTaskCreate(&bletask, "ble_run", 1024 * 25, NULL, 3 , NULL) != pdPASS ) {
-        printf("task run failed\r\n");
-    }
-
-  while (1) {
-    // raise the task priority of LVGL and/or reduce the handler period can improve the performance
-    vTaskDelay(pdMS_TO_TICKS(2));
-    lv_timer_handler();
-    
-    // The task running lv_timer_handler should have lower priority than that running `lv_tick_inc`
-    // if (touch.read()) {
-    //   uint8_t n = touch.getPointNum();
-    //   printf("getPointNum: %d  \r\n", n);
-    //   for (uint8_t i = 0; i < n; i++) {
-    //     TP_Point t = touch.getPoint(i);
-    //     printf("[%d] point x: %d  point y: %d \r\n", i, t.x, t.y);
-    //   }
+    // if( xSemaphore != NULL)
+    // {
+    //     printf("Creating ble task");
+    //     if ( xTaskCreate(&bletask, "ble_run", 1024 * 25, NULL, 5 , NULL) != pdPASS ) {
+    //     printf("task run failed\r\n");
     // }
+    // }
+    // else
+    // {
+    //      printf("Failed to create Semaphore");
+    // }
+    bletask();
+
+//   while (1) {
+//     // raise the task priority of LVGL and/or reduce the handler period can improve the performance
+            while(1){
+  vTaskDelay(pdMS_TO_TICKS(2));
+  lv_timer_handler();
   }
+    
+//     // The task running lv_timer_handler should have lower priority than that running `lv_tick_inc`
+//     // if (touch.read()) {
+//     //   uint8_t n = touch.getPointNum();
+//     //   printf("getPointNum: %d  \r\n", n);
+//     //   for (uint8_t i = 0; i < n; i++) {
+//     //     TP_Point t = touch.getPoint(i);
+//     //     printf("[%d] point x: %d  point y: %d \r\n", i, t.x, t.y);
+//     //   }
+//     // }
+//   }
    
 }
 

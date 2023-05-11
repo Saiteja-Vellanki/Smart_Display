@@ -933,6 +933,16 @@
         "children": [],
         "depends_on": null,
         "help": null,
+        "id": "SOC_GPIO_VALID_DIGITAL_IO_PAD_MASK",
+        "name": "SOC_GPIO_VALID_DIGITAL_IO_PAD_MASK",
+        "range": null,
+        "title": null,
+        "type": "hex"
+    },
+    {
+        "children": [],
+        "depends_on": null,
+        "help": null,
         "id": "SOC_GPIO_SUPPORT_SLP_SWITCH",
         "name": "SOC_GPIO_SUPPORT_SLP_SWITCH",
         "range": null,
@@ -2683,6 +2693,16 @@
         "children": [],
         "depends_on": null,
         "help": null,
+        "id": "IDF_CI_BUILD",
+        "name": "IDF_CI_BUILD",
+        "range": null,
+        "title": null,
+        "type": "bool"
+    },
+    {
+        "children": [],
+        "depends_on": null,
+        "help": null,
         "id": "IDF_TARGET_ARCH_RISCV",
         "name": "IDF_TARGET_ARCH_RISCV",
         "range": null,
@@ -3488,7 +3508,7 @@
             },
             {
                 "children": [],
-                "depends_on": "(IDF_TARGET_ESP32 && ESP32_REV_MIN >= 3) || SOC_SECURE_BOOT_V2_RSA",
+                "depends_on": "(IDF_TARGET_ESP32 && ESP32_REV_MIN_FULL >= 300) || SOC_SECURE_BOOT_V2_RSA",
                 "help": null,
                 "id": "SECURE_BOOT_V2_RSA_SUPPORTED",
                 "name": "SECURE_BOOT_V2_RSA_SUPPORTED",
@@ -3518,7 +3538,7 @@
             },
             {
                 "children": [],
-                "depends_on": "ESP32_REV_MIN >= 3",
+                "depends_on": "ESP32_REV_MIN_FULL >= 300",
                 "help": null,
                 "id": "SECURE_BOOT_V2_PREFERRED",
                 "name": "SECURE_BOOT_V2_PREFERRED",
@@ -3689,7 +3709,7 @@
                         "type": "choice"
                     }
                 ],
-                "depends_on": "SOC_SECURE_BOOT_SUPPORTED && !(IDF_TARGET_ESP32C3 && ESP32C3_REV_MIN < 3)",
+                "depends_on": "SOC_SECURE_BOOT_SUPPORTED && !(IDF_TARGET_ESP32C3 && ESP32C3_REV_MIN_FULL < 3)",
                 "help": "Build a bootloader which enables Secure Boot on first boot.\n\nOnce enabled, Secure Boot will not boot a modified bootloader. The bootloader will only load a partition\ntable or boot an app if the data has a verified digital signature. There are implications for reflashing\nupdated apps once secure boot is enabled.\n\nWhen enabling secure boot, JTAG and ROM BASIC Interpreter are permanently disabled by default.",
                 "id": "SECURE_BOOT",
                 "name": "SECURE_BOOT",
@@ -4022,7 +4042,7 @@
                     {
                         "children": [],
                         "depends_on": "SOC_SUPPORTS_SECURE_DL_MODE && <choice SECURE_UART_ROM_DL_MODE>",
-                        "help": "If set, during startup the app will burn an eFuse bit to permanently switch the UART ROM\nDownload Mode into a separate Secure Download mode. This option can only work if\nDownload Mode is not already disabled by eFuse.\n\nSecure Download mode limits the use of Download Mode functions to simple flash read,\nwrite and erase operations, plus a command to return a summary of currently enabled\nsecurity features.\n\nSecure Download mode is not compatible with the esptool.py flasher stub feature,\nespefuse.py, read/writing memory or registers, encrypted download, or any other\nfeatures that interact with unsupported Download Mode commands.\n\nSecure Download mode should be enabled in any application where Flash Encryption\nand/or Secure Boot is enabled. Disabling this option does not immediately cancel\nthe benefits of the security features, but it increases the potential \"attack\nsurface\" for an attacker to try and bypass them with a successful physical attack.\n\nIt is also possible to enable secure download mode at runtime by calling\nesp_efuse_enable_rom_secure_download_mode()\n\nNote: Secure Download mode is not available for ESP32 (includes revisions till ECO3).",
+                        "help": "If set, during startup the app will burn an eFuse bit to permanently switch the UART ROM\nDownload Mode into a separate Secure Download mode. This option can only work if\nDownload Mode is not already disabled by eFuse.\n\nSecure Download mode limits the use of Download Mode functions to update SPI config,\nchanging baud rate, basic flash write and a command to return a summary of currently\nenabled security features (`get_security_info`).\n\nSecure Download mode is not compatible with the esptool.py flasher stub feature,\nespefuse.py, read/writing memory or registers, encrypted download, or any other\nfeatures that interact with unsupported Download Mode commands.\n\nSecure Download mode should be enabled in any application where Flash Encryption\nand/or Secure Boot is enabled. Disabling this option does not immediately cancel\nthe benefits of the security features, but it increases the potential \"attack\nsurface\" for an attacker to try and bypass them with a successful physical attack.\n\nIt is also possible to enable secure download mode at runtime by calling\nesp_efuse_enable_rom_secure_download_mode()\n\nNote: Secure Download mode is not available for ESP32 (includes revisions till ECO3).",
                         "id": "SECURE_ENABLE_SECURE_ROM_DL_MODE",
                         "name": "SECURE_ENABLE_SECURE_ROM_DL_MODE",
                         "range": null,
@@ -4040,7 +4060,7 @@
                         "type": "bool"
                     }
                 ],
-                "depends_on": "(SECURE_BOOT_V2_ENABLED || SECURE_FLASH_ENC_ENABLED) && (!IDF_TARGET_ESP32 || ESP32_REV_MIN_3)",
+                "depends_on": "(SECURE_BOOT_V2_ENABLED || SECURE_FLASH_ENC_ENABLED) && !(IDF_TARGET_ESP32 && ESP32_REV_MIN_FULL < 300)",
                 "help": null,
                 "id": "security-features-uart-rom-download-mode",
                 "name": "SECURE_UART_ROM_DL_MODE",
@@ -4149,8 +4169,8 @@
         "children": [],
         "depends_on": null,
         "help": null,
-        "id": "ESP_ROM_HAS_JPEG_DECODE",
-        "name": "ESP_ROM_HAS_JPEG_DECODE",
+        "id": "ESP_ROM_HAS_MZ_CRC32",
+        "name": "ESP_ROM_HAS_MZ_CRC32",
         "range": null,
         "title": null,
         "type": "bool"
@@ -4159,8 +4179,8 @@
         "children": [],
         "depends_on": null,
         "help": null,
-        "id": "ESP_ROM_SUPPORT_MULTIPLE_UART",
-        "name": "ESP_ROM_SUPPORT_MULTIPLE_UART",
+        "id": "ESP_ROM_HAS_JPEG_DECODE",
+        "name": "ESP_ROM_HAS_JPEG_DECODE",
         "range": null,
         "title": null,
         "type": "bool"
@@ -4231,6 +4251,16 @@
         "help": null,
         "id": "ESP_ROM_NEEDS_SWSETUP_WORKAROUND",
         "name": "ESP_ROM_NEEDS_SWSETUP_WORKAROUND",
+        "range": null,
+        "title": null,
+        "type": "bool"
+    },
+    {
+        "children": [],
+        "depends_on": null,
+        "help": null,
+        "id": "ESP_ROM_HAS_ETS_PRINTF_BUG",
+        "name": "ESP_ROM_HAS_ETS_PRINTF_BUG",
         "range": null,
         "title": null,
         "type": "bool"
@@ -5282,6 +5312,94 @@
             },
             {
                 "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "<choice ESP32S3_REV_MIN>",
+                                        "help": null,
+                                        "id": "ESP32S3_REV_MIN_0",
+                                        "name": "ESP32S3_REV_MIN_0",
+                                        "range": null,
+                                        "title": "Rev v0.0 (ECO0)",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "<choice ESP32S3_REV_MIN>",
+                                        "help": null,
+                                        "id": "ESP32S3_REV_MIN_1",
+                                        "name": "ESP32S3_REV_MIN_1",
+                                        "range": null,
+                                        "title": "Rev v0.1 (ECO1)",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "<choice ESP32S3_REV_MIN>",
+                                        "help": null,
+                                        "id": "ESP32S3_REV_MIN_2",
+                                        "name": "ESP32S3_REV_MIN_2",
+                                        "range": null,
+                                        "title": "Rev v0.2 (ECO2)",
+                                        "type": "bool"
+                                    }
+                                ],
+                                "depends_on": null,
+                                "help": "Required minimum chip revision. ESP-IDF will check for it and\nreject to boot if the chip revision fails the check.\nThis ensures the chip used will have some modifications (features, or bugfixes).\n\nThe complied binary will only support chips above this revision,\nthis will also help to reduce binary size.",
+                                "id": "component-config-hardware-settings-chip-revision-minimum-supported-esp32-s3-revision",
+                                "name": "ESP32S3_REV_MIN",
+                                "title": "Minimum Supported ESP32-S3 Revision",
+                                "type": "choice"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": null,
+                                "id": "ESP32S3_REV_MIN_FULL",
+                                "name": "ESP32S3_REV_MIN_FULL",
+                                "range": null,
+                                "title": null,
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": null,
+                                "id": "ESP_REV_MIN_FULL",
+                                "name": "ESP_REV_MIN_FULL",
+                                "range": null,
+                                "title": null,
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": null,
+                                "id": "ESP32S3_REV_MAX_FULL",
+                                "name": "ESP32S3_REV_MAX_FULL",
+                                "range": null,
+                                "title": null,
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": null,
+                                "id": "ESP_REV_MAX_FULL",
+                                "name": "ESP_REV_MAX_FULL",
+                                "range": null,
+                                "title": null,
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": null,
+                        "id": "component-config-hardware-settings-chip-revision",
+                        "title": "Chip revision",
+                        "type": "menu"
+                    },
                     {
                         "children": [
                             {
@@ -6668,54 +6786,75 @@
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "ESP_TASK_WDT",
-                                "help": "If this option is enabled, the Task Watchdog Timer will be configured to\ntrigger the panic handler when it times out. This can also be configured\nat run time (see Task Watchdog Timer API Reference)",
-                                "id": "ESP_TASK_WDT_PANIC",
-                                "name": "ESP_TASK_WDT_PANIC",
+                                "depends_on": "ESP_TASK_WDT_EN",
+                                "help": null,
+                                "id": "ESP_TASK_WDT_USE_ESP_TIMER",
+                                "name": "ESP_TASK_WDT_USE_ESP_TIMER",
                                 "range": null,
-                                "title": "Invoke panic handler on Task Watchdog timeout",
+                                "title": null,
                                 "type": "bool"
                             },
                             {
-                                "children": [],
-                                "depends_on": "ESP_TASK_WDT",
-                                "help": "Timeout period configuration for the Task Watchdog Timer in seconds.\nThis is also configurable at run time (see Task Watchdog Timer API Reference)",
-                                "id": "ESP_TASK_WDT_TIMEOUT_S",
-                                "name": "ESP_TASK_WDT_TIMEOUT_S",
-                                "range": [
-                                    1,
-                                    60
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "ESP_TASK_WDT_INIT",
+                                        "help": "If this option is enabled, the Task Watchdog Timer will be configured to\ntrigger the panic handler when it times out. This can also be configured\nat run time (see Task Watchdog Timer API Reference)",
+                                        "id": "ESP_TASK_WDT_PANIC",
+                                        "name": "ESP_TASK_WDT_PANIC",
+                                        "range": null,
+                                        "title": "Invoke panic handler on Task Watchdog timeout",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "ESP_TASK_WDT_INIT",
+                                        "help": "Timeout period configuration for the Task Watchdog Timer in seconds.\nThis is also configurable at run time (see Task Watchdog Timer API Reference)",
+                                        "id": "ESP_TASK_WDT_TIMEOUT_S",
+                                        "name": "ESP_TASK_WDT_TIMEOUT_S",
+                                        "range": [
+                                            1,
+                                            60
+                                        ],
+                                        "title": "Task Watchdog timeout period (seconds)",
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "ESP_TASK_WDT_INIT",
+                                        "help": "If this option is enabled, the Task Watchdog Timer will watch the CPU0\nIdle Task. Having the Task Watchdog watch the Idle Task allows for detection\nof CPU starvation as the Idle Task not being called is usually a symptom of\nCPU starvation. Starvation of the Idle Task is detrimental as FreeRTOS household\ntasks depend on the Idle Task getting some runtime every now and then.",
+                                        "id": "ESP_TASK_WDT_CHECK_IDLE_TASK_CPU0",
+                                        "name": "ESP_TASK_WDT_CHECK_IDLE_TASK_CPU0",
+                                        "range": null,
+                                        "title": "Watch CPU0 Idle Task",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "ESP_TASK_WDT_INIT && !FREERTOS_UNICORE",
+                                        "help": "If this option is enabled, the Task Watchdog Timer will wach the CPU1\nIdle Task.",
+                                        "id": "ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1",
+                                        "name": "ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1",
+                                        "range": null,
+                                        "title": "Watch CPU1 Idle Task",
+                                        "type": "bool"
+                                    }
                                 ],
-                                "title": "Task Watchdog timeout period (seconds)",
-                                "type": "int"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "ESP_TASK_WDT",
-                                "help": "If this option is enabled, the Task Watchdog Timer will watch the CPU0\nIdle Task. Having the Task Watchdog watch the Idle Task allows for detection\nof CPU starvation as the Idle Task not being called is usually a symptom of\nCPU starvation. Starvation of the Idle Task is detrimental as FreeRTOS household\ntasks depend on the Idle Task getting some runtime every now and then.",
-                                "id": "ESP_TASK_WDT_CHECK_IDLE_TASK_CPU0",
-                                "name": "ESP_TASK_WDT_CHECK_IDLE_TASK_CPU0",
+                                "depends_on": "ESP_TASK_WDT_EN",
+                                "help": "Enabling this option will cause the Task Watchdog Timer to be initialized\nautomatically at startup.",
+                                "id": "ESP_TASK_WDT_INIT",
+                                "name": "ESP_TASK_WDT_INIT",
                                 "range": null,
-                                "title": "Watch CPU0 Idle Task",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "ESP_TASK_WDT && !FREERTOS_UNICORE",
-                                "help": "If this option is enabled, the Task Wtachdog Timer will wach the CPU1\nIdle Task.",
-                                "id": "ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1",
-                                "name": "ESP_TASK_WDT_CHECK_IDLE_TASK_CPU1",
-                                "range": null,
-                                "title": "Watch CPU1 Idle Task",
+                                "title": "Initialize Task Watchdog Timer on startup",
                                 "type": "bool"
                             }
                         ],
                         "depends_on": null,
-                        "help": "The Task Watchdog Timer can be used to make sure individual tasks are still\nrunning. Enabling this option will cause the Task Watchdog Timer to be\ninitialized automatically at startup. The Task Watchdog timer can be\ninitialized after startup as well (see Task Watchdog Timer API Reference)",
-                        "id": "ESP_TASK_WDT",
-                        "name": "ESP_TASK_WDT",
+                        "help": "The Task Watchdog Timer can be used to make sure individual tasks are still\nrunning. Enabling this option will enable the Task Watchdog Timer. It can be\neither initialized automatically at startup or initialized after startup\n(see Task Watchdog Timer API Reference)",
+                        "id": "ESP_TASK_WDT_EN",
+                        "name": "ESP_TASK_WDT_EN",
                         "range": null,
-                        "title": "Initialize Task Watchdog Timer on startup",
+                        "title": "Enable Task Watchdog Timer",
                         "type": "bool"
                     },
                     {
